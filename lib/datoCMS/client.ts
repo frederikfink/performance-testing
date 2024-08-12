@@ -8,15 +8,11 @@ interface RequestOptions {
   includeDrafts?: boolean;
 }
 
-export const request = async <
-  TResult = unknown,
-  TVariables = unknown,
-  TDocument = unknown
->(
+export const request = async <TResult = unknown, TVariables = unknown>(
   query: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
   options?: RequestOptions
-): Promise<TDocument> => {
+): Promise<TResult> => {
   const payload = JSON.stringify({ query: print(query), variables });
   const response = await fetch("https://graphql.datocms.com/", {
     headers: {
@@ -35,7 +31,7 @@ export const request = async <
     throw new Error(`Failed request ${payload}`);
   }
 
-  const result = (await response.json()) as { data: TDocument };
+  const result = (await response.json()) as { data: TResult };
 
   return result.data;
 };

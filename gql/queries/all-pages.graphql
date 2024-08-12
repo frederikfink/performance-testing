@@ -1,0 +1,6 @@
+query AllPages {
+  allPages {
+    title
+    slug
+  }
+}

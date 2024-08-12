@@ -1,10 +1,32 @@
-import Dashboard from "@/components/dashboard";
-import Image from "next/image";
+import {
+  AllPagesDocument,
+  AllPagesQuery,
+  AllPagesQueryVariables,
+} from "@/gql/generated/graphql";
+import { request } from "@/lib/datoCMS/client";
 
-export default function Home() {
+const Page = async () => {
+  const { allPages } = await request<AllPagesQuery, AllPagesQueryVariables>(
+    AllPagesDocument,
+    {},
+    { tags: [`pages`] }
+  );
+
   return (
     <main>
-      <Dashboard />
+      {allPages.length === 0 ? (
+        <p>No pages found</p>
+      ) : (
+        <ul>
+          {allPages.map((page) => (
+            <li key={page.slug}>
+              <a href={`/${page.slug}`}>{page.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </main>
   );
-}
+};
+
+export default Page;

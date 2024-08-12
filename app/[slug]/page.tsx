@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Page = async ({ params: { slug } }: Props) => {
-  const { page } = await request<PageQuery, PageQueryVariables, PageQuery>(
+  const { page } = await request<PageQuery, PageQueryVariables>(
     PageDocument,
     { slug },
     { tags: [`page:${slug}`] }
