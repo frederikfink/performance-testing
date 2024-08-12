@@ -24,7 +24,7 @@ const Page = async ({ params: { slug } }: Props) => {
 
   return (
     <article className="max-w-prose mx-auto mt-20 prose">
-      {page.title && <h1 className="border-b pb-4">{page.title}</h1>}
+      <h1 className="border-b pb-4">{page.title}</h1>
       {page.content && <StructuredText data={page.content.value} />}
     </article>
   );
