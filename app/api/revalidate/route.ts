@@ -1,7 +1,7 @@
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as any;
-    console.log(body?.related_entities);
+    console.log(body);
 
     return new Response("OK", { status: 200 });
   } catch (error) {
