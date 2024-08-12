@@ -18,6 +18,7 @@ export const request = async <TResult = unknown, TVariables = unknown>(
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_DATOCMS_READ_ONLY_TOKEN}`,
       "X-Exclude-Invalid": "true",
+      "X-Include-Drafts": "true",
       "Content-Type": "application/json",
     },
     method: "POST",
