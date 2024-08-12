@@ -1,0 +1,11 @@
+query Page($slug: String) {
+  page(filter: { slug: { eq: $slug } }) {
+    __typename
+    title
+    content {
+      blocks
+      links
+      value
+    }
+  }
+}
