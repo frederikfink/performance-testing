@@ -21,9 +21,9 @@ export const request = async <TResult = unknown, TVariables = unknown>(
       "X-Include-Drafts": "true",
       "Content-Type": "application/json",
     },
+    cache: "no-store",
     method: "POST",
     body: payload,
-    cache: "no-cache",
     next: {
       ...(options?.tags && { tags: options?.tags }),
     },
