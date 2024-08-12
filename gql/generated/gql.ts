@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "query AllPages {\n  allPages {\n    title\n    slug\n  }\n}": types.AllPagesDocument,
+    "query Navbar {\n  navbar {\n    title\n    links {\n      label\n      url\n    }\n  }\n}": types.NavbarDocument,
     "query Page($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    __typename\n    title\n    content {\n      blocks\n      links\n      value\n    }\n  }\n}": types.PageDocument,
 };
 
@@ -35,6 +36,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query AllPages {\n  allPages {\n    title\n    slug\n  }\n}"): (typeof documents)["query AllPages {\n  allPages {\n    title\n    slug\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Navbar {\n  navbar {\n    title\n    links {\n      label\n      url\n    }\n  }\n}"): (typeof documents)["query Navbar {\n  navbar {\n    title\n    links {\n      label\n      url\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

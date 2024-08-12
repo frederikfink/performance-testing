@@ -1,0 +1,9 @@
+query Navbar {
+  navbar {
+    title
+    links {
+      label
+      url
+    }
+  }
+}
