@@ -4,7 +4,10 @@ export async function POST(req: Request) {
   try {
     const { tags } = (await req.json()) as { tags: string[] };
 
-    tags.forEach((tag) => revalidateTag(tag));
+    tags.forEach((tag) => {
+      console.log(`Revalidating tag: ${tag}`);
+      revalidateTag(tag);
+    });
 
     return new Response("OK", { status: 200 });
   } catch (error) {
