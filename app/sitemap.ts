@@ -14,7 +14,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   );
 
   return allPages.map((page) => ({
-    url: `/${page.slug}`,
+    url: `https://performance-testing-one.vercel.app/${page.slug}`,
     lastModified: new Date(page._publishedAt).toISOString(),
   }));
 };

@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://performance-testing-one.vercel.app/sitemap.xml
