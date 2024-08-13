@@ -10,7 +10,7 @@ const BlogStructuredText = ({ page }: Props) => {
   if (!page?.content) return null;
 
   return (
-    <article className="prose mx-auto block">
+    <article className="mx-auto prose max-w-4xl container block px-3">
       <StructuredText
         data={page.content as any}
         renderBlock={({ record }) => {

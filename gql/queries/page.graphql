@@ -13,6 +13,7 @@ query Page($slug: String) {
           id
           title
           description
+          alternativeText
           image {
             responsiveImage {
               alt
