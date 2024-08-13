@@ -1,18 +1,9 @@
 import { Button } from "@/components/ui/button";
-import {
-  AllPagesDocument,
-  AllPagesQuery,
-  AllPagesQueryVariables,
-} from "@/gql/generated/graphql";
-import { request } from "@/lib/datoCMS/client";
+import { getAllPages } from "@/lib/datoCMS/helpers";
 import Link from "next/link";
 
 const Page = async () => {
-  const { allPages } = await request<AllPagesQuery, AllPagesQueryVariables>(
-    AllPagesDocument,
-    {},
-    { tags: [`pages`] }
-  );
+  const allPages = await getAllPages();
 
   return (
     <div className="container">

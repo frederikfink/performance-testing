@@ -1,5 +1,6 @@
 query AllPages {
   allPages {
+    _publishedAt
     title
     slug
   }

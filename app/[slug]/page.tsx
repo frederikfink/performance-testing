@@ -1,11 +1,6 @@
-import {
-  PageDocument,
-  PageQuery,
-  PageQueryVariables,
-} from "@/gql/generated/graphql";
-import { request } from "@/lib/datoCMS/client";
+import { getPage, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
-import { StructuredText } from "react-datocms";
+import { Metadata, StructuredText, toNextMetadata } from "react-datocms";
 
 interface Props {
   params: {
@@ -13,12 +8,15 @@ interface Props {
   };
 }
 
+export const generateMetadata = async ({
+  params: { slug },
+}: Props): Promise<Metadata> => {
+  const page = await getPageMetadata(slug);
+  return toNextMetadata(page?.seo || []);
+};
+
 const Page = async ({ params: { slug } }: Props) => {
-  const { page } = await request<PageQuery, PageQueryVariables>(
-    PageDocument,
-    { slug },
-    { tags: [`page:${slug}`] }
-  );
+  const page = await getPage(slug);
 
   if (!page) return notFound();
 
