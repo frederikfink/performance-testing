@@ -1,3 +1,4 @@
+import BlogStructuredText from "@/components/blog-structured-text";
 import { getPage, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
 import { Metadata, StructuredText, toNextMetadata } from "react-datocms";
@@ -21,9 +22,9 @@ const Page = async ({ params: { slug } }: Props) => {
   if (!page) return notFound();
 
   return (
-    <article className="max-w-prose mx-auto mt-20 prose">
+    <article>
       <h1 className="border-b pb-4">{page.title}</h1>
-      {page.content && <StructuredText data={page.content.value} />}
+      {page && <BlogStructuredText page={page} />}
     </article>
   );
 };

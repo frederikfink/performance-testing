@@ -8,13 +8,13 @@ import {
 import { request } from "./client";
 
 export const getPage = async (slug: string) => {
-  const { page } = await request(
+  const data = await request(
     PageDocument,
     { slug },
     { tags: [`page:${slug}`] }
   );
 
-  return page;
+  return data.page;
 };
 
 export const getPageMetadata = async (slug: string) => {

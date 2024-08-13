@@ -1,11 +1,37 @@
 query Page($slug: String) {
   page(filter: { slug: { eq: $slug } }) {
+    id
     __typename
     title
     content {
-      blocks
       links
       value
+      blocks {
+        __typename
+        ... on BlogImageRecord {
+          __typename
+          id
+          title
+          description
+          image {
+            responsiveImage {
+              alt
+              base64
+              bgColor
+              title
+              webpSrcSet
+              src
+              width
+              height
+            }
+          }
+        }
+        ... on BlogCalloutRecord {
+          __typename
+          id
+          callout
+        }
+      }
     }
   }
 }
