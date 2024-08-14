@@ -10,7 +10,7 @@ const BlogImage = ({ data }: Props) => {
 
   return (
     <Image
-      alt={data.image.alternativeText}
+      alt={data.alternativeText}
       className={cn(
         "w-full absolute object-contain transition-all duration-1000 ease-in-out"
       )}
