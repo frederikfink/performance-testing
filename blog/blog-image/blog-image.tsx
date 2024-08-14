@@ -15,7 +15,7 @@ const BlogImage = ({ data }: Props) => {
         "w-full absolute object-contain transition-all duration-1000 ease-in-out"
       )}
       src={data.image.responsiveImage.src}
-      sizes="100vw"
+      sizes={`(max-width: 1024px) 100vw, (min-width: 1024px) max-w-4xl`}
       width={data.image.responsiveImage.width}
       height={data.image.responsiveImage.height}
       blurDataURL={data.image.responsiveImage.base64}
