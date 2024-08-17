@@ -4,6 +4,7 @@ query Article($slug: String) {
     id
     slug
     title
+    subtitle
     heroImage {
       focalPoint {
         x

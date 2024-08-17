@@ -5,6 +5,7 @@ import "./globals.css";
 import { request } from "@/lib/datoCMS/client";
 import { NavbarDocument } from "@/gql/generated/graphql";
 import Navbar from "@/components/global/navbar";
+import Footer from "@/components/global/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ const Layout = async ({ children }: Props) => {
       <body className={inter.className}>
         <Navbar data={navbar} />
         <main className="pt-14">{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,9 +1,19 @@
-import BlogStructuredText from "@/components/blog-structured-text";
+import Callout from "@/blog/blocks/callout/callout";
+import Media from "@/blog/blocks/media/media";
 import Image from "@/components/image/image";
-import { ImageFragment } from "@/gql/generated/graphql";
+import {
+  BlogCalloutBlockRecord,
+  BlogMediaFragment,
+  ImageFragment,
+} from "@/gql/generated/graphql";
 import { getArticle, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
-import { Metadata, toNextMetadata } from "react-datocms";
+import {
+  Metadata,
+  StructuredText,
+  toNextMetadata,
+  TypesafeStructuredTextGraphQlResponse,
+} from "react-datocms";
 
 interface Props {
   params: {
@@ -31,12 +41,31 @@ const Page = async ({ params: { slug } }: Props) => {
         <Image
           sizes="100wv"
           priority={true}
-          className="h-[480px]"
+          className="h-[200px] mb-20  "
           image={image}
           alt={image.alt || undefined}
         />
       )}
-      {article && <BlogStructuredText article={article} />}
+      <article className="mx-auto prose text-primary max-w-4xl container block px-3 [&>h1]:font-medium [&>h1]:tracking-tighter">
+        <h1 className="mb-4">{article.title}</h1>
+        <p className="text-lg text-primary tracking-tight">
+          {article.subtitle}
+        </p>
+        <hr />
+        <StructuredText
+          data={article.content as TypesafeStructuredTextGraphQlResponse}
+          renderBlock={({ record }) => {
+            const key = record._modelApiKey;
+
+            if (key === "blog_media_block")
+              return <Media data={record as BlogMediaFragment} />;
+            if (key === "blog_callout_block")
+              return <Callout data={record as BlogCalloutBlockRecord} />;
+
+            return <></>;
+          }}
+        />
+      </article>
     </article>
   );
 };
