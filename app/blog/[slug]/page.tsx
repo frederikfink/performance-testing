@@ -1,4 +1,6 @@
 import BlogStructuredText from "@/components/blog-structured-text";
+import Image from "@/components/image/image";
+import { ImageFragment } from "@/gql/generated/graphql";
 import { getArticle, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
 import { Metadata, toNextMetadata } from "react-datocms";
@@ -21,8 +23,20 @@ const Page = async ({ params: { slug } }: Props) => {
 
   if (!article) return notFound();
 
+  const image = article.heroImage?.responsiveImage as ImageFragment | undefined;
+
   return (
-    <article>{article && <BlogStructuredText article={article} />}</article>
+    <article>
+      {image && (
+        <Image
+          priority={true}
+          className="h-[480px]"
+          image={image}
+          alt={image.alt || undefined}
+        />
+      )}
+      {article && <BlogStructuredText article={article} />}
+    </article>
   );
 };
 

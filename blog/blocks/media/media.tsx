@@ -5,13 +5,16 @@ interface Props {
   data: BlogMediaFragment;
 }
 
-const Media = ({ data: { image, alternativeText } }: Props) => {
-  if (!image.responsiveImage) return null;
+const Media = ({ data }: Props) => {
+  if (!data.image.responsiveImage) return null;
+
+  const image = data.image.responsiveImage as ImageFragment;
 
   return (
     <Image
-      image={image.responsiveImage as ImageFragment}
-      alt={alternativeText}
+      image={image as ImageFragment}
+      alt={data.alternativeText || undefined}
+      className="max-h-[90vh]"
     />
   );
 };

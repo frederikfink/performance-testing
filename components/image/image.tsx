@@ -4,16 +4,19 @@ import { Image as DatoImage } from "react-datocms";
 
 interface Props {
   image: ImageFragment;
-  alt: string;
+  priority?: boolean;
+  alt?: string;
+  className?: string;
 }
 
-const Image = ({ image, alt }: Props) => {
+const Image = ({ image, priority, className, alt }: Props) => {
   return (
     <div className="w-full relative">
       <DatoImage
-        className={cn("max-h-[90vh]")}
+        priority={priority}
+        className={cn(className)}
         objectFit="cover"
-        data={image}
+        data={{ ...image, ...(alt && { alt }) }}
       />
     </div>
   );
