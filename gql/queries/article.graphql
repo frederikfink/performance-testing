@@ -10,7 +10,9 @@ query Article($slug: String) {
         x
         y
       }
-      responsiveImage {
+      responsiveImage(
+        imgixParams: { crop: focalpoint, w: "3600", h: "200", fit: crop }
+      ) {
         ...Image
       }
     }
