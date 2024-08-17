@@ -1,0 +1,7 @@
+fragment BlogCodeBlock on BlogCodeBlockRecord {
+  id
+  _modelApiKey
+  title
+  language
+  code
+}

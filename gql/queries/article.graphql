@@ -19,6 +19,7 @@ query Article($slug: String) {
       blocks {
         ...BlogMedia
         ...BlogCallout
+        ...BlogCodeBlock
       }
     }
   }

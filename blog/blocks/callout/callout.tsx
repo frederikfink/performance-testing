@@ -1,7 +1,7 @@
-import { BlogCalloutBlockRecord } from "@/gql/generated/graphql";
+import { BlogCalloutFragment } from "@/gql/generated/graphql";
 
 interface Props {
-  data: BlogCalloutBlockRecord;
+  data: BlogCalloutFragment;
 }
 
 const Callout = ({ data: { callout } }: Props) => {
