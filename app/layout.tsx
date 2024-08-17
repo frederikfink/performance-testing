@@ -7,6 +7,7 @@ import { NavbarDocument } from "@/gql/generated/graphql";
 import Navbar from "@/components/global/navbar";
 import Footer from "@/components/global/footer";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ const Layout = async ({ children }: Props) => {
         >
           <Navbar data={navbar} />
           <main className="pt-14">{children}</main>
+          <Analytics />
           <Footer />
         </ThemeProvider>
       </body>
