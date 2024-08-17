@@ -15,6 +15,7 @@ const Media = ({ data }: Props) => {
       image={image as ImageFragment}
       alt={data.alternativeText || undefined}
       className="max-h-[90vh]"
+      sizes={`(max-width: 1024px) 100vw, (min-width: 1024px) 896px`}
     />
   );
 };

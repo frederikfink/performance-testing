@@ -29,6 +29,7 @@ const Page = async ({ params: { slug } }: Props) => {
     <article>
       {image && (
         <Image
+          sizes="100wv"
           priority={true}
           className="h-[480px]"
           image={image}
