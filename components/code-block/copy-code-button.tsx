@@ -19,7 +19,7 @@ const CopyCodeButton = ({ code, className }: Props) => {
 
     setTimeout(() => {
       setIsCopied(false);
-    }, 1000);
+    }, 2000);
   };
 
   return (

@@ -84,13 +84,13 @@
 }
 
 .rotate-in {
-  animation: rotateIn 0.15s ease 0.15s both;
+  animation: rotateIn 0.15s ease 0.05s both;
 }
 
 @keyframes rotateIn {
   from {
     opacity: 0;
-    transform: rotate(-10deg);
+    transform: rotate(-30deg);
   }
   to {
     opacity: 1;

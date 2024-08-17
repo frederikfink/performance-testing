@@ -42,7 +42,7 @@ const CodeBlock = async ({ code, title, language }: Props) => {
 
   return (
     <div className="rounded-lg border">
-      <div className="px-4 py-3 text-sm bg-muted gap-2 dark:bg-black items-center rounded-t-lg text-muted-foreground flex">
+      <div className="px-4 py-3 text-sm bg-muted/30 gap-2 dark:bg-black items-center rounded-t-lg text-muted-foreground flex">
         {getIcon(language)}
         <p className="text-[13px]">{title}</p>
         <CopyCodeButton className="ml-auto" code={code} />
