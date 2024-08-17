@@ -1,34 +1,38 @@
 "use server";
 
 import {
-  AllPagesDocument,
+  AllArticlesDocument,
   MetadataDocument,
-  PageDocument,
+  ArticleDocument,
 } from "@/gql/generated/graphql";
 import { request } from "./client";
 
-export const getPage = async (slug: string) => {
-  const data = await request(
-    PageDocument,
+export const getArticle = async (slug: string) => {
+  const { article } = await request(
+    ArticleDocument,
     { slug },
-    { tags: [`page:${slug}`] }
+    { tags: [`article:${slug}`] }
   );
 
-  return data.page;
+  return article;
 };
 
 export const getPageMetadata = async (slug: string) => {
-  const { page } = await request(
+  const { article } = await request(
     MetadataDocument,
     { slug },
-    { tags: [`page:${slug}`] }
+    { tags: [`article:${slug}`] }
   );
 
-  return page;
+  return article;
 };
 
-export const getAllPages = async () => {
-  const { allPages } = await request(AllPagesDocument, {}, { tags: [`pages`] });
+export const getAllArticles = async () => {
+  const { allArticles } = await request(
+    AllArticlesDocument,
+    {},
+    { tags: [`articles`] }
+  );
 
-  return allPages;
+  return allArticles;
 };

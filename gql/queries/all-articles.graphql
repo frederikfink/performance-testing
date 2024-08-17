@@ -1,5 +1,5 @@
-query AllPages {
-  allPages {
+query AllArticles {
+  allArticles {
     _publishedAt
     title
     slug

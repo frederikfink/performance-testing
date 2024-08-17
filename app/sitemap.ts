@@ -1,21 +1,17 @@
-import {
-  AllPagesDocument,
-  AllPagesQuery,
-  AllPagesQueryVariables,
-} from "@/gql/generated/graphql";
+import { AllArticlesDocument } from "@/gql/generated/graphql";
 import { request } from "@/lib/datoCMS/client";
 import { MetadataRoute } from "next";
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const { allPages } = await request<AllPagesQuery, AllPagesQueryVariables>(
-    AllPagesDocument,
+  const { allArticles } = await request(
+    AllArticlesDocument,
     {},
     { tags: [`pages`] }
   );
 
-  return allPages.map((page) => ({
-    url: `https://performance-testing-one.vercel.app/${page.slug}`,
-    lastModified: new Date(page._publishedAt).toISOString(),
+  return allArticles.map((article) => ({
+    url: `https://performance-testing-one.vercel.app/blog/${article.slug}`,
+    lastModified: new Date(article._publishedAt).toISOString(),
   }));
 };
 

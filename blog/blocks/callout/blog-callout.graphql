@@ -1,0 +1,5 @@
+fragment BlogCallout on BlogCalloutBlockRecord {
+  _modelApiKey
+  id
+  callout
+}

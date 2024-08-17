@@ -1,0 +1,20 @@
+query Article($slug: String) {
+  article(filter: { slug: { eq: $slug } }) {
+    __typename
+    id
+    slug
+    title
+    heroImage {
+      responsiveImage {
+        ...Image
+      }
+    }
+    content {
+      value
+      blocks {
+        ...BlogMedia
+        ...BlogCallout
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 query Metadata($slug: String) {
-  page(filter: { slug: { eq: $slug } }) {
+  article(filter: { slug: { eq: $slug } }) {
     seo: _seoMetaTags {
       attributes
       content

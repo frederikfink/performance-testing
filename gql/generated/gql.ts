@@ -13,10 +13,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query AllPages {\n  allPages {\n    _publishedAt\n    title\n    slug\n  }\n}": types.AllPagesDocument,
+    "fragment BlogCallout on BlogCalloutBlockRecord {\n  _modelApiKey\n  id\n  callout\n}": types.BlogCalloutFragmentDoc,
+    "fragment BlogMedia on BlogMediaBlockRecord {\n  _modelApiKey\n  id\n  title\n  description\n  alternativeText\n  image {\n    responsiveImage {\n      ...Image\n    }\n  }\n}": types.BlogMediaFragmentDoc,
+    "fragment Image on ResponsiveImage {\n  alt\n  base64\n  bgColor\n  title\n  webpSrcSet\n  src\n  width\n  height\n}": types.ImageFragmentDoc,
+    "query AllArticles {\n  allArticles {\n    _publishedAt\n    title\n    slug\n  }\n}": types.AllArticlesDocument,
+    "query Article($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    __typename\n    id\n    slug\n    title\n    heroImage {\n      responsiveImage {\n        ...Image\n      }\n    }\n    content {\n      value\n      blocks {\n        ...BlogMedia\n        ...BlogCallout\n      }\n    }\n  }\n}": types.ArticleDocument,
     "query Navbar {\n  navbar {\n    title\n    links {\n      label\n      url\n    }\n  }\n}": types.NavbarDocument,
-    "query Metadata($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}": types.MetadataDocument,
-    "query Page($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    id\n    __typename\n    title\n    content {\n      links\n      value\n      blocks {\n        __typename\n        ... on BlogImageRecord {\n          __typename\n          id\n          title\n          description\n          alternativeText\n          image {\n            responsiveImage {\n              alt\n              base64\n              bgColor\n              title\n              webpSrcSet\n              src\n              width\n              height\n            }\n          }\n        }\n        ... on BlogCalloutRecord {\n          __typename\n          id\n          callout\n        }\n      }\n    }\n  }\n}": types.PageDocument,
+    "query Metadata($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}": types.MetadataDocument,
 };
 
 /**
@@ -36,7 +39,23 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query AllPages {\n  allPages {\n    _publishedAt\n    title\n    slug\n  }\n}"): (typeof documents)["query AllPages {\n  allPages {\n    _publishedAt\n    title\n    slug\n  }\n}"];
+export function graphql(source: "fragment BlogCallout on BlogCalloutBlockRecord {\n  _modelApiKey\n  id\n  callout\n}"): (typeof documents)["fragment BlogCallout on BlogCalloutBlockRecord {\n  _modelApiKey\n  id\n  callout\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment BlogMedia on BlogMediaBlockRecord {\n  _modelApiKey\n  id\n  title\n  description\n  alternativeText\n  image {\n    responsiveImage {\n      ...Image\n    }\n  }\n}"): (typeof documents)["fragment BlogMedia on BlogMediaBlockRecord {\n  _modelApiKey\n  id\n  title\n  description\n  alternativeText\n  image {\n    responsiveImage {\n      ...Image\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment Image on ResponsiveImage {\n  alt\n  base64\n  bgColor\n  title\n  webpSrcSet\n  src\n  width\n  height\n}"): (typeof documents)["fragment Image on ResponsiveImage {\n  alt\n  base64\n  bgColor\n  title\n  webpSrcSet\n  src\n  width\n  height\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query AllArticles {\n  allArticles {\n    _publishedAt\n    title\n    slug\n  }\n}"): (typeof documents)["query AllArticles {\n  allArticles {\n    _publishedAt\n    title\n    slug\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Article($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    __typename\n    id\n    slug\n    title\n    heroImage {\n      responsiveImage {\n        ...Image\n      }\n    }\n    content {\n      value\n      blocks {\n        ...BlogMedia\n        ...BlogCallout\n      }\n    }\n  }\n}"): (typeof documents)["query Article($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    __typename\n    id\n    slug\n    title\n    heroImage {\n      responsiveImage {\n        ...Image\n      }\n    }\n    content {\n      value\n      blocks {\n        ...BlogMedia\n        ...BlogCallout\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -44,11 +63,7 @@ export function graphql(source: "query Navbar {\n  navbar {\n    title\n    link
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Metadata($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}"): (typeof documents)["query Metadata($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query Page($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    id\n    __typename\n    title\n    content {\n      links\n      value\n      blocks {\n        __typename\n        ... on BlogImageRecord {\n          __typename\n          id\n          title\n          description\n          alternativeText\n          image {\n            responsiveImage {\n              alt\n              base64\n              bgColor\n              title\n              webpSrcSet\n              src\n              width\n              height\n            }\n          }\n        }\n        ... on BlogCalloutRecord {\n          __typename\n          id\n          callout\n        }\n      }\n    }\n  }\n}"): (typeof documents)["query Page($slug: String) {\n  page(filter: {slug: {eq: $slug}}) {\n    id\n    __typename\n    title\n    content {\n      links\n      value\n      blocks {\n        __typename\n        ... on BlogImageRecord {\n          __typename\n          id\n          title\n          description\n          alternativeText\n          image {\n            responsiveImage {\n              alt\n              base64\n              bgColor\n              title\n              webpSrcSet\n              src\n              width\n              height\n            }\n          }\n        }\n        ... on BlogCalloutRecord {\n          __typename\n          id\n          callout\n        }\n      }\n    }\n  }\n}"];
+export function graphql(source: "query Metadata($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}"): (typeof documents)["query Metadata($slug: String) {\n  article(filter: {slug: {eq: $slug}}) {\n    seo: _seoMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n  site: _site {\n    favicon: faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

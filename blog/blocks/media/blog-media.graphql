@@ -1,0 +1,12 @@
+fragment BlogMedia on BlogMediaBlockRecord {
+  _modelApiKey
+  id
+  title
+  description
+  alternativeText
+  image {
+    responsiveImage {
+      ...Image
+    }
+  }
+}
