@@ -5,6 +5,10 @@ fragment BlogMedia on BlogMediaBlockRecord {
   description
   alternativeText
   image {
+    focalPoint {
+      x
+      y
+    }
     responsiveImage {
       ...Image
     }

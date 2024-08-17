@@ -6,5 +6,6 @@ fragment Image on ResponsiveImage {
   webpSrcSet
   src
   width
+  alt
   height
 }

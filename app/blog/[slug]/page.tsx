@@ -11,9 +11,12 @@ import { notFound } from "next/navigation";
 import {
   Metadata,
   StructuredText,
+  renderNodeRule,
   toNextMetadata,
   TypesafeStructuredTextGraphQlResponse,
 } from "react-datocms";
+import { isCode } from "datocms-structured-text-utils";
+import CodeBlock from "@/components/code-block/code-block";
 
 interface Props {
   params: {
@@ -46,12 +49,16 @@ const Page = async ({ params: { slug } }: Props) => {
           alt={image.alt || undefined}
         />
       )}
-      <article className="mx-auto prose text-primary max-w-4xl container block px-3 [&>h1]:font-medium [&>h1]:tracking-tighter">
-        <h1 className="mb-4">{article.title}</h1>
-        <p className="text-lg text-primary tracking-tight">
-          {article.subtitle}
-        </p>
-        <hr />
+      <div className="mx-auto text-primary max-w-4xl container block px-3 space-y-8 [&>p]:leading-7 animate-in">
+        <div className="my-12 animate-in">
+          <h1 className="mb-4 text-3xl font-medium tracking-tighter">
+            {article.title}
+          </h1>
+          <p className="text-lg text-primary tracking-tight">
+            {article.subtitle}
+          </p>
+        </div>
+        <hr className="mb-12" />
         <StructuredText
           data={article.content as TypesafeStructuredTextGraphQlResponse}
           renderBlock={({ record }) => {
@@ -64,8 +71,13 @@ const Page = async ({ params: { slug } }: Props) => {
 
             return <></>;
           }}
+          customNodeRules={[
+            renderNodeRule(isCode, ({ node, key }) => {
+              return <CodeBlock key={key} code={node} />;
+            }),
+          ]}
         />
-      </article>
+      </div>
     </article>
   );
 };

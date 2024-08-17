@@ -6,6 +6,7 @@ import { request } from "@/lib/datoCMS/client";
 import { NavbarDocument } from "@/gql/generated/graphql";
 import Navbar from "@/components/global/navbar";
 import Footer from "@/components/global/footer";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,16 @@ const Layout = async ({ children }: Props) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar data={navbar} />
-        <main className="pt-14">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar data={navbar} />
+          <main className="pt-14">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
