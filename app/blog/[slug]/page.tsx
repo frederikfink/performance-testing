@@ -1,19 +1,13 @@
-import Media from "@/blog/blocks/media/media";
 import Image from "@/components/image/image";
-import {
-  BlogCodeBlockFragment,
-  BlogMediaFragment,
-  ImageFragment,
-} from "@/gql/generated/graphql";
+import { ImageFragment } from "@/gql/generated/graphql";
 import { getArticle, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
 import {
   Metadata,
-  StructuredText,
   toNextMetadata,
   TypesafeStructuredTextGraphQlResponse,
 } from "react-datocms";
-import CodeBlock from "@/blog/blocks/code-block/code-block";
+import BlogRender from "@/components/blog-render";
 
 interface Props {
   params: {
@@ -57,19 +51,8 @@ const Page = async ({ params: { slug } }: Props) => {
           </p>
         </div>
         <hr className="mb-12" />
-        <StructuredText
-          data={article.content as TypesafeStructuredTextGraphQlResponse}
-          renderBlock={({ record }) => {
-            const key = record._modelApiKey;
-            const data = record as unknown;
-
-            if (key === "blog_media_block")
-              return <Media data={data as BlogMediaFragment} />;
-            if (key === "blog_code_block")
-              return <CodeBlock data={data as BlogCodeBlockFragment} />;
-
-            return <></>;
-          }}
+        <BlogRender
+          content={article.content as TypesafeStructuredTextGraphQlResponse}
         />
       </div>
     </article>
