@@ -83,6 +83,21 @@
   }
 }
 
+.rotate-in {
+  animation: rotateIn 0.15s ease 0.15s both;
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0);
+  }
+}
+
 code {
   counter-reset: step;
   counter-increment: step 0;
