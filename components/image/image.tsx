@@ -8,16 +8,37 @@ interface Props {
   alt?: string;
   className?: string;
   sizes?: string;
+  focalPoint?: { x: number; y: number };
+  objectPosition?: string;
 }
 
-const Image = ({ image, priority, className, sizes, alt }: Props) => {
+const Image = ({
+  image,
+  priority,
+  className,
+  sizes,
+  alt,
+  objectPosition,
+  focalPoint,
+}: Props) => {
+  const getPosition = () =>
+    objectPosition
+      ? objectPosition
+      : focalPoint
+      ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%`
+      : "";
+
   return (
-    <div className="w-full relative">
+    <div
+      className="w-full relative"
+      style={{ backgroundColor: `${image.bgColor}` }}
+    >
       <DatoImage
         priority={priority}
         className={cn(className)}
         sizes={sizes}
         objectFit="cover"
+        objectPosition={getPosition()}
         data={{ ...image, ...(alt && { alt }) }}
       />
     </div>

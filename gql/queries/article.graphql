@@ -5,6 +5,10 @@ query Article($slug: String) {
     slug
     title
     heroImage {
+      focalPoint {
+        x
+        y
+      }
       responsiveImage {
         ...Image
       }
