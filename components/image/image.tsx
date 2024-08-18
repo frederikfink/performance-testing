@@ -31,6 +31,7 @@ const Image = ({
   return (
     <div className={cn("w-full relative", className)}>
       <DatoImage
+        priority={priority}
         className={cn(className)}
         sizes={sizes}
         objectFit="cover"
