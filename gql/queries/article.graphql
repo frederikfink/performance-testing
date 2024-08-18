@@ -11,7 +11,7 @@ query Article($slug: String) {
         y
       }
       responsiveImage(
-        imgixParams: { crop: focalpoint, w: "3600", h: "200", fit: crop }
+        imgixParams: { crop: focalpoint, w: "2000", h: "200", fit: crop }
       ) {
         ...Image
       }
