@@ -29,12 +29,8 @@ const Image = ({
       : "";
 
   return (
-    <div
-      className="w-full relative"
-      style={{ backgroundColor: `${image.bgColor}` }}
-    >
+    <div className={cn("w-full relative", className)}>
       <DatoImage
-        priority={priority}
         className={cn(className)}
         sizes={sizes}
         objectFit="cover"

@@ -30,11 +30,16 @@ const CopyCodeButton = ({ code, className }: Props) => {
       className={cn("gap-2", className)}
     >
       {isCopied ? (
-        <Check weight="bold" className="rotate-in" size={14} />
+        <>
+          <Check weight="bold" className="rotate-in" size={14} />
+          <span>Copied</span>
+        </>
       ) : (
-        <Clipboard weight="bold" className="rotate-in" size={14} />
+        <>
+          <Clipboard weight="bold" className="rotate-in" size={14} />
+          <span>Copy</span>
+        </>
       )}
-      Copy
     </Button>
   );
 };

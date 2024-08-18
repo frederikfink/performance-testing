@@ -41,7 +41,7 @@ const Page = async ({ params: { slug } }: Props) => {
         <Image
           sizes="(max-width: 2000px) 100vw, 2000px"
           priority={true}
-          className="h-[200px] mb-20"
+          className="h-[200px] mb-20 bg-muted"
           focalPoint={article.heroImage?.focalPoint || undefined}
           image={image}
           alt={image.alt || undefined}
