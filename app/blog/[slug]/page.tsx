@@ -14,6 +14,7 @@ import {
   TypesafeStructuredTextGraphQlResponse,
 } from "react-datocms";
 import CodeBlock from "@/blog/blocks/code-block/code-block";
+import { Suspense } from "react";
 
 interface Props {
   params: {
@@ -57,20 +58,22 @@ const Page = async ({ params: { slug } }: Props) => {
           </p>
         </div>
         <hr className="mb-12" />
-        <StructuredText
-          data={article.content as TypesafeStructuredTextGraphQlResponse}
-          renderBlock={({ record }) => {
-            const key = record._modelApiKey;
-            const data = record as unknown;
+        <Suspense fallback={<div>Loading...</div>}>
+          <StructuredText
+            data={article.content as TypesafeStructuredTextGraphQlResponse}
+            renderBlock={({ record }) => {
+              const key = record._modelApiKey;
+              const data = record as unknown;
 
-            if (key === "blog_media_block")
-              return <Media data={data as BlogMediaFragment} />;
-            if (key === "blog_code_block")
-              return <CodeBlock data={data as BlogCodeBlockFragment} />;
+              if (key === "blog_media_block")
+                return <Media data={data as BlogMediaFragment} />;
+              if (key === "blog_code_block")
+                return <CodeBlock data={data as BlogCodeBlockFragment} />;
 
-            return <></>;
-          }}
-        />
+              return <></>;
+            }}
+          />
+        </Suspense>
       </div>
     </article>
   );
