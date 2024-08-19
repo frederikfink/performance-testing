@@ -15,6 +15,11 @@ import {
 } from "react-datocms";
 import CodeBlock from "@/blog/blocks/code-block/code-block";
 import { Suspense } from "react";
+import { Badge } from "@/components/ui/badge";
+import { prettyDate } from "@/lib/pretty";
+import Title from "@/components/article/title";
+import ContentLoadingSkeleton from "@/components/article/content-loading-skeleton";
+import Author from "@/components/author.tsx/author";
 
 interface Props {
   params: {
@@ -37,28 +42,25 @@ const Page = async ({ params: { slug } }: Props) => {
   const image = article.heroImage?.responsiveImage as ImageFragment | undefined;
 
   return (
-    <article className="mb-20">
+    <article>
       {image && (
         <Image
-          sizes="(max-width: 2000px) 100vw, 2000px"
+          sizes="(max-width: 896px) 100vw, 896px"
           priority={true}
-          className="h-[200px] mb-20 bg-muted"
+          className="h-[500px] mb-8 bg-muted max-w-4xl mx-auto"
           focalPoint={article.heroImage?.focalPoint || undefined}
           image={image}
           alt={image.alt || undefined}
         />
       )}
       <div className="mx-auto text-primary max-w-4xl container block px-3 space-y-8 [&>p]:leading-7 animate-in dark:[&>p]:text-muted-foreground">
-        <div className="my-12 animate-in">
-          <h1 className="mb-4 text-3xl font-medium tracking-tighter">
-            {article.title}
-          </h1>
-          <p className="text-lg dark:text-muted-foreground text-primary tracking-tight">
-            {article.subtitle}
-          </p>
+        <Title title={article.title} subtitle={article.subtitle} />
+        {article.author && <Author author={article.author} />}
+        <div className="flex items-center gap-4">
+          <Badge variant={"outline"}>{prettyDate(article._publishedAt)}</Badge>
         </div>
         <hr className="mb-12" />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<ContentLoadingSkeleton />}>
           <StructuredText
             data={article.content as TypesafeStructuredTextGraphQlResponse}
             renderBlock={({ record }) => {

@@ -1,0 +1,16 @@
+fragment Author on AuthorRecord {
+  fullName
+  title
+  company
+  image {
+    focalPoint {
+      x
+      y
+    }
+    responsiveImageresponsiveImage(
+      imgixParams: { crop: focalpoint, w: "48", h: "48", fit: crop }
+    ) {
+      ...Image
+    }
+  }
+}

@@ -33,7 +33,7 @@ const Layout = async ({ children }: Props) => {
           disableTransitionOnChange
         >
           <Navbar data={navbar} />
-          <main className="pt-14">{children}</main>
+          <main className="pt-14 min-[90vh]">{children}</main>
           <Analytics />
           <Footer />
         </ThemeProvider>

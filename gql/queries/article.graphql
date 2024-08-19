@@ -5,13 +5,17 @@ query Article($slug: String) {
     slug
     title
     subtitle
+    _publishedAt
+    author {
+      ...Author
+    }
     heroImage {
       focalPoint {
         x
         y
       }
       responsiveImage(
-        imgixParams: { crop: focalpoint, w: "2000", h: "200", fit: crop }
+        imgixParams: { crop: focalpoint, w: "896", h: "500", fit: crop }
       ) {
         ...Image
       }
