@@ -1,3 +1,5 @@
+"use client";
+
 import { AuthorFragment, ImageFragment } from "@/gql/generated/graphql";
 import Image from "../image/image";
 import { Button } from "../ui/button";
