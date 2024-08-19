@@ -29,16 +29,14 @@ const Image = ({
       : "";
 
   return (
-    <div className={cn("w-full relative", className)}>
-      <DatoImage
-        priority={priority}
-        className={cn(className)}
-        sizes={sizes}
-        objectFit="cover"
-        objectPosition={getPosition()}
-        data={{ ...image, ...(alt && { alt }) }}
-      />
-    </div>
+    <DatoImage
+      priority={priority}
+      className={cn(className)}
+      sizes={sizes}
+      objectFit="cover"
+      objectPosition={getPosition()}
+      data={{ ...image, ...(alt && { alt }) }}
+    />
   );
 };
 
