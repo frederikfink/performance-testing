@@ -4,7 +4,11 @@ import { AuthorFragment, ImageFragment } from "@/gql/generated/graphql";
 import Image from "../image/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { InstagramLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
+import {
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+} from "@phosphor-icons/react/dist/ssr";
 
 interface Props {
   author: AuthorFragment;
@@ -70,7 +74,7 @@ const Author = ({ author }: Props) => {
               asChild
             >
               <Link href={author.github}>
-                <InstagramLogo className="mr-1" size={16} />
+                <GithubLogo className="mr-1" size={16} />
                 <span>GitHub</span>
               </Link>
             </Button>
