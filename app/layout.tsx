@@ -26,17 +26,10 @@ const Layout = async ({ children }: Props) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar data={navbar} />
-          <main className="pt-14 min-[90vh]">{children}</main>
-          <Analytics />
-          <Footer />
-        </ThemeProvider>
+        <Navbar data={navbar} />
+        <main className="pt-14 min-[90vh]">{children}</main>
+        <Analytics />
+        <Footer />
       </body>
     </html>
   );

@@ -1,6 +1,10 @@
-query Article($slug: String) {
-  article(filter: { slug: { eq: $slug } }) {
+query Article($slug: String, $locale: SiteLocale) {
+  article(filter: { slug: { eq: $slug } }, locale: $locale) {
     __typename
+    _allTitleLocales {
+      locale
+      value
+    }
     id
     slug
     title

@@ -4,6 +4,7 @@ import {
   BlogCodeBlockFragment,
   BlogMediaFragment,
   ImageFragment,
+  SiteLocale,
 } from "@/gql/generated/graphql";
 import { getArticle, getPageMetadata } from "@/lib/datoCMS/helpers";
 import { notFound } from "next/navigation";
@@ -20,6 +21,8 @@ import { prettyDate } from "@/lib/pretty";
 import Title from "@/components/article/title";
 import ContentLoadingSkeleton from "@/components/article/content-loading-skeleton";
 import Author from "@/components/author.tsx/author";
+import Link from "next/link";
+import { Check } from "@phosphor-icons/react/dist/ssr";
 
 const getReadtime = (content: TypesafeStructuredTextGraphQlResponse) => {
   let readtime = 4;
@@ -31,17 +34,23 @@ interface Props {
   params: {
     slug: string;
   };
+  searchParams: {
+    locale?: string;
+  };
 }
 
 export const generateMetadata = async ({
   params: { slug },
+  searchParams,
 }: Props): Promise<Metadata> => {
-  const article = await getPageMetadata(slug);
+  const locale = searchParams.locale || "en";
+  const article = await getPageMetadata(slug, locale);
   return toNextMetadata(article?.seo || []);
 };
 
-const Page = async ({ params: { slug } }: Props) => {
-  const article = await getArticle(slug);
+const Page = async ({ params: { slug }, searchParams }: Props) => {
+  const locale = searchParams.locale || "en";
+  const article = await getArticle(slug, locale as SiteLocale);
 
   if (!article) return notFound();
 
@@ -64,7 +73,16 @@ const Page = async ({ params: { slug } }: Props) => {
       <div className="mx-auto text-primary max-w-4xl block space-y-8 [&>p]:leading-7 animate-in dark:[&>p]:text-muted-foreground">
         <div className="flex items-center gap-4">
           <Badge variant={"outline"}>{prettyDate(article._publishedAt)}</Badge>
-          <Badge variant={"outline"}>{getReadtime(content)} Minutes</Badge>
+          {article._allTitleLocales?.map((l) => (
+            <Link key={l.locale} href={`/blog/${slug}?locale=${l.locale}`}>
+              <Badge variant={l.locale === locale ? "default" : "outline"}>
+                {l.locale === locale && (
+                  <Check className="mr-2" weight="bold" />
+                )}
+                {l.locale}
+              </Badge>
+            </Link>
+          ))}
         </div>
         <Title
           className={"animate-in"}
